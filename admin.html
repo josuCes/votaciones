@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14513f">
+  <meta name="description" content="Panel de administración del Sistema de Votación de ADEP.">
+  <title>Administración | ADEP V2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body class="pagina-admin">
+  <header class="encabezado-admin-principal">
+    <div class="marca-admin">
+      <img src="logo-blanco.png" alt="Logotipo de ADEP" class="logo-admin" onerror="this.hidden=true">
+      <div class="marca-admin-texto">
+        <h1>ADEP</h1>
+        <p class="marca-subtitulo">Sistema de Votación</p>
+        <p class="marca-lema">Participación que fortalece nuestra comunidad</p>
+      </div>
+    </div>
+    <a href="index.html" id="botonVolverInicio" class="boton-volver-inicio" aria-label="Volver al inicio">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>
+      <span>Volver al inicio</span>
+    </a>
+  </header>
+
+  <main class="admin-contenido">
+    <!-- Acceso administrativo -->
+    <section id="panelLoginAdmin" class="panel-login-admin" aria-labelledby="tituloLoginAdmin">
+      <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+      <span class="etiqueta-superior login-etiqueta">ACCESO SEGURO</span>
+      <h2 id="tituloLoginAdmin">Acceso administrativo</h2>
+      <p>Inicie sesión con una cuenta autorizada para administrar las reuniones de ADEP.</p>
+      <form id="formLoginAdmin" class="formulario-admin-login" novalidate>
+        <div class="grupo-campo">
+          <label for="correoAdmin">Correo electrónico</label>
+          <input id="correoAdmin" name="correoAdmin" type="email" autocomplete="username" placeholder="nombre@ejemplo.com" required>
+        </div>
+        <div class="grupo-campo">
+          <label for="contrasenaAdmin">Contraseña</label>
+          <input id="contrasenaAdmin" name="contrasenaAdmin" type="password" autocomplete="current-password" placeholder="Ingrese su contraseña" required>
+        </div>
+        <p id="mensajeLoginAdmin" class="mensaje" role="alert" aria-live="polite" hidden></p>
+        <button type="submit" id="btnLoginAdmin" class="boton boton-principal boton-ancho"><span aria-hidden="true">↗</span> Iniciar sesión</button>
+      </form>
+    </section>
+
+    <!-- Panel administrativo: solo aparece tras validar permisos -->
+    <section id="panelAdmin" hidden>
+      <div class="saludo-admin">
+        <div>
+          <p class="saludo-pretexto">BIENVENIDO AL PANEL</p>
+          <h2>Sistema Administrador <span>del Sistema de Votación ADEP</span></h2>
+          <p class="saludo-descripcion">Desde aquí puede gestionar reuniones, participantes y filiales, supervisar votaciones y consultar el historial.</p>
+          <p class="saludo-lema">Juntos hacemos la diferencia.</p>
+          <div class="saludo-tags" aria-label="Valores de ADEP"><span>Democracia</span><i>•</i><span>Diálogo</span><i>•</i><span>Participación</span></div>
+        </div>
+        <div class="ilustracion-admin" aria-hidden="true">
+          <div class="forma-organica"></div>
+          <div class="libro-libro libro-uno"></div><div class="libro-libro libro-dos"></div><div class="libro-libro libro-tres"></div>
+          <div class="libro-abierto"><span></span><span></span><i></i></div>
+          <div class="rama rama-izquierda"><i></i><i></i><i></i><i></i></div>
+          <div class="rama rama-derecha"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="destello destello-uno">✦</div><div class="destello destello-dos">✧</div>
+          <div class="curva-tricolor"></div>
+        </div>
+      </div>
+
+      <div class="bienvenida-admin-barra">
+        <p id="nombreAdministrador"><span aria-hidden="true">●</span> Sesión administrativa</p>
+        <button type="button" id="btnCerrarSesion" class="boton boton-claro"><span aria-hidden="true">↪</span> Cerrar sesión</button>
+      </div>
+
+      <!-- Navegación horizontal circular de seis secciones -->
+      <nav class="navegacion-admin" aria-label="Secciones administrativas">
+        <button type="button" id="btnCarruselIzquierda" class="flecha-carrusel" aria-label="Ir a las opciones anteriores" title="Opciones anteriores">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div id="carruselNavegacion" class="carrusel-navegacion" tabindex="0" aria-label="Opciones del panel administrativo">
+          <button type="button" class="tarjeta-navegacion activa" id="navCrearReunion" data-seccion="seccionCrearReunion" aria-controls="seccionCrearReunion" aria-current="page">
+            <span class="icono-nav icono-verde"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M7 12h10"/></svg></span>
+            <span>Crear una reunión</span>
+          </button>
+          <button type="button" class="tarjeta-navegacion" id="navAdministrarReunion" data-seccion="seccionAdministrarReunion" aria-controls="seccionAdministrarReunion">
+            <span class="icono-nav icono-verde-claro"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3M8 17h7"/></svg></span>
+            <span>Administrar reunión</span>
+          </button>
+          <button type="button" class="tarjeta-navegacion" id="navReunionActiva" data-seccion="seccionReunionActiva" aria-controls="seccionReunionActiva">
+            <span class="icono-nav icono-rojo"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m10 8 6 4-6 4z"/></svg></span>
+            <span>Reunión activa</span>
+          </button>
+          <button type="button" class="tarjeta-navegacion" id="navGestionarUsuarios" data-seccion="seccionGestionarUsuarios" aria-controls="seccionGestionarUsuarios">
+            <span class="icono-nav icono-violeta"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v2"/></svg></span>
+            <span>Gestionar usuarios</span>
+          </button>
+          <button type="button" class="tarjeta-navegacion" id="navGestionarFiliales" data-seccion="seccionGestionarFiliales" aria-controls="seccionGestionarFiliales">
+            <span class="icono-nav icono-filial"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-6 4h2m2 0h2"/></svg></span>
+            <span>Gestionar filiales</span>
+          </button>
+          <button type="button" class="tarjeta-navegacion" id="navHistorial" data-seccion="seccionHistorial" aria-controls="seccionHistorial">
+            <span class="icono-nav icono-azul"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2M4 4v5h5"/></svg></span>
+            <span>Historial</span>
+          </button>
+        </div>
+        <button type="button" id="btnCarruselDerecha" class="flecha-carrusel" aria-label="Ir a las opciones siguientes" title="Opciones siguientes">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </nav>
+
+      <!-- SECCIÓN 1: CREAR REUNIÓN -->
+      <section id="seccionCrearReunion" class="seccion-panel activa" aria-labelledby="tituloCrearReunion">
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">PLANIFICACIÓN</p>
+          <h2 id="tituloCrearReunion">Crear una nueva reunión</h2>
+          <p>Registre la reunión y prepare el PIN que compartirán los participantes. Crear una reunión no la activa automáticamente.</p>
+        </div>
+        <form id="formCrearReunion" class="formulario-admin formulario-en-cuadricula" novalidate>
+          <div class="grupo-campo campo-completo">
+            <label for="nombreReunion">Nombre de la reunión</label>
+            <input type="text" id="nombreReunion" name="nombreReunion" maxlength="120" placeholder="Ej. Asamblea de Sarapiquí" autocomplete="off" required>
+          </div>
+          <div class="grupo-campo">
+            <label for="filialReunion">Filial</label>
+            <select id="filialReunion" name="filialReunion" required><option value="">Cargando filiales...</option></select>
+            <small>Elija la filial a la que pertenece la reunión.</small>
+          </div>
+          <div class="grupo-campo">
+            <label for="pinNuevaReunion">PIN de la reunión</label>
+            <input type="password" id="pinNuevaReunion" name="pinNuevaReunion" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="new-password" placeholder="Ej. 4821" required>
+            <small>Debe contener exactamente cuatro números.</small>
+          </div>
+          <div class="grupo-campo campo-completo">
+            <label for="fechaReunion">Fecha y hora de la reunión</label>
+            <input type="text" id="fechaReunion" name="fechaReunion" placeholder="Seleccione fecha y hora" readonly aria-haspopup="dialog" required>
+            <small>Toque el campo para abrir el calendario del sistema ADEP.</small>
+          </div>
+          <p id="mensajeReunion" class="mensaje campo-completo" role="status" aria-live="polite" hidden></p>
+          <div class="acciones-formulario campo-completo"><button type="submit" id="btnCrearReunion" class="boton boton-principal"><span aria-hidden="true">＋</span> Crear reunión</button></div>
+        </form>
+      </section>
+
+      <!-- SECCIÓN 2: ADMINISTRAR REUNIÓN -->
+      <section id="seccionAdministrarReunion" class="seccion-panel" aria-labelledby="tituloAdministrarReunion" hidden>
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">ORGANIZACIÓN</p>
+          <h2 id="tituloAdministrarReunion">Administrar una reunión</h2>
+          <p>Seleccione una reunión para preparar sus preguntas y revisar sus datos. Las preguntas no se publican hasta que usted lo decida.</p>
+        </div>
+        <div class="grupo-campo selector-reunion-grupo">
+          <label for="reunionSeleccionada">Reunión que desea administrar</label>
+          <select id="reunionSeleccionada" name="reunionSeleccionada"><option value="">Cargando reuniones...</option></select>
+          <small>Las reuniones activas aparecerán primero y las más nuevas antes que las antiguas.</small>
+        </div>
+        <div id="detalleReunion" class="tarjeta-detalle-reunion" hidden>
+          <div class="detalle-reunion-cabecera"><div><span class="etiqueta-superior">REUNIÓN SELECCIONADA</span><h3 id="nombreReunionActual">Reunión</h3></div><span id="estadoReunion" class="etiqueta-estado">Sin activar</span></div>
+          <div class="datos-reunion-grid">
+            <p><strong>Filial</strong><span id="filialActual">—</span></p>
+            <p><strong>Fecha y hora</strong><span id="fechaActual">—</span></p>
+          </div>
+          <p id="mensajeEstadoReunion" class="mensaje" role="status" aria-live="polite" hidden></p>
+        </div>
+        <div id="sinReunionSeleccionada" class="estado-vacio">Seleccione una reunión para ver sus preguntas y administrarla.</div>
+
+        <div class="subseccion-admin">
+          <div class="subseccion-cabecera"><span class="numero-paso">1</span><div><h3>Preparar las votaciones</h3><p>Agregue las preguntas en el orden en que desea presentarlas.</p></div></div>
+          <form id="formCrearPregunta" class="formulario-admin formulario-en-cuadricula" novalidate>
+            <div class="grupo-campo campo-completo"><label for="textoPregunta">Pregunta o tema</label><textarea id="textoPregunta" name="textoPregunta" rows="3" maxlength="500" placeholder="Escriba la pregunta que verán los participantes" required></textarea></div>
+            <div class="grupo-campo campo-completo">
+              <label for="fechaVotacion">Fecha y hora programada <span class="texto-opcional">(opcional)</span></label>
+              <input type="text" id="fechaVotacion" name="fechaVotacion" placeholder="Opcional · seleccionar fecha y hora" readonly aria-haspopup="dialog">
+              <small>Puede dejar este campo vacío. La pregunta se podrá publicar manualmente durante la reunión.</small>
+            </div>
+            <p id="mensajePregunta" class="mensaje campo-completo" role="status" aria-live="polite" hidden></p>
+            <div class="acciones-formulario campo-completo"><button type="submit" id="btnGuardarPregunta" class="boton boton-principal" disabled><span aria-hidden="true">＋</span> Agregar pregunta</button></div>
+          </form>
+        </div>
+
+        <div class="subseccion-admin">
+          <div class="subseccion-cabecera"><span class="numero-paso">2</span><div><h3>Preguntas preparadas</h3><p>Revise el orden y seleccione la pregunta que desea utilizar durante la reunión.</p></div></div>
+          <ol id="listaPreguntas" class="lista-preguntas"><li class="estado-vacio">Seleccione una reunión para ver sus preguntas.</li></ol>
+        </div>
+
+        <div class="subseccion-admin ultima-subseccion">
+          <div class="subseccion-cabecera"><span class="numero-paso">3</span><div><h3>Administrar el estado de la reunión</h3><p>Active la reunión cuando los participantes estén listos para ingresar. Para finalizarla o cancelarla, cierre primero cualquier votación que siga abierta. Una reunión que no esté activa se puede eliminar junto con sus preguntas y votos.</p></div></div>
+          <div class="acciones-reunion">
+            <button type="button" id="btnActivarReunion" class="boton boton-principal" disabled><span aria-hidden="true">▶</span> Activar reunión</button>
+            <button type="button" id="btnCerrarReunion" class="boton boton-peligro" disabled><span aria-hidden="true">✓</span> Finalizar reunión</button>
+            <button type="button" id="btnCancelarReunion" class="boton boton-borde-peligro" disabled><span aria-hidden="true">×</span> Cancelar reunión</button>
+            <button type="button" id="btnEliminarReunion" class="boton boton-borde-peligro" disabled><span aria-hidden="true">🗑</span> Eliminar reunión</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 3: REUNIÓN ACTIVA -->
+      <section id="seccionReunionActiva" class="seccion-panel" aria-labelledby="tituloReunionActiva" hidden>
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">EN VIVO</p>
+          <h2 id="tituloReunionActiva">Reunión activa</h2>
+          <p>Publique una pregunta preparada, supervise los 60 segundos y consulte los resultados y la participación.</p>
+        </div>
+        <div class="grupo-campo selector-reunion-grupo"><label for="reunionActivaSeleccionada">Reunión</label><select id="reunionActivaSeleccionada"><option value="">Seleccione una reunión</option></select></div>
+
+        <div class="bloque-activo">
+          <div class="subseccion-cabecera"><span class="icono-bloque icono-rojizo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 12 7-12 7z"/></svg></span><div><h3>Control de la votación</h3><p>Solo puede haber una pregunta abierta por reunión.</p></div></div>
+          <div class="grupo-campo"><label for="preguntaSeleccionada">Pregunta que desea publicar</label><select id="preguntaSeleccionada" name="preguntaSeleccionada" disabled><option value="">Seleccione una pregunta</option></select></div>
+          <div id="panelPreguntaActual" class="panel-pregunta-actual" hidden>
+            <span class="etiqueta-superior">PREGUNTA ACTUAL</span>
+            <p id="textoPreguntaActual" class="texto-pregunta-actual">No hay una votación publicada.</p>
+            <div class="datos-tiempo"><div><span class="etiqueta-superior">ESTADO</span><strong id="estadoVotacion">En espera</strong></div><div class="cronometro-admin"><span id="cronometroVotacion" role="timer" aria-live="off">60 s</span><small>Tiempo restante</small></div></div>
+          </div>
+          <div class="acciones-votacion"><button type="button" id="btnPublicarPregunta" class="boton boton-principal" disabled><span aria-hidden="true">▶</span> Publicar votación (60 segundos)</button><button type="button" id="btnCerrarVotacion" class="boton boton-peligro" disabled><span aria-hidden="true">■</span> Cerrar votación</button></div>
+          <p id="mensajeControlVotacion" class="mensaje" role="status" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="bloque-activo">
+          <div class="subseccion-cabecera"><span class="icono-bloque icono-verde-suave"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17M8 16v-5M13 16V7M18 16V3"/></svg></span><div><h3>Resultados</h3><p>Los datos corresponden a la pregunta abierta o a la pregunta finalizada seleccionada.</p></div></div>
+          <div id="panelResultados" class="panel-resultados"><p class="estado-vacio">Los resultados aparecerán aquí cuando existan votos registrados.</p></div>
+          <p id="mensajeResultados" class="mensaje" role="status" aria-live="polite" hidden></p>
+        </div>
+
+        <div class="bloque-activo bloque-participacion">
+          <div class="subseccion-cabecera"><span class="icono-bloque icono-azulado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v2"/></svg></span><div><h3>Participación de la reunión</h3><p>Se muestran únicamente las personas que ingresaron a esta reunión con su PIN.</p></div></div>
+          <div id="panelParticipacion" class="panel-participacion"><p class="estado-vacio">Seleccione una reunión para consultar la participación.</p></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 4: GESTIONAR USUARIOS -->
+      <section id="seccionGestionarUsuarios" class="seccion-panel" aria-labelledby="tituloGestionUsuarios" hidden>
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">PERSONAS Y PERMISOS</p>
+          <h2 id="tituloGestionUsuarios">Gestionar usuarios</h2>
+          <p>Registre participantes y administre los perfiles autorizados. La cédula se muestra con el formato costarricense de tres bloques: 1-1111-1111.</p>
+        </div>
+        <form id="formCrearUsuario" class="formulario-admin formulario-en-cuadricula" novalidate>
+          <div class="grupo-campo"><label for="nombreUsuarioNuevo">Nombre completo</label><input id="nombreUsuarioNuevo" name="nombreUsuarioNuevo" type="text" maxlength="120" autocomplete="name" placeholder="Nombre y apellidos" required></div>
+          <div class="grupo-campo"><label for="cedulaUsuarioNuevo">Cédula</label><input id="cedulaUsuarioNuevo" name="cedulaUsuarioNuevo" type="text" inputmode="numeric" maxlength="11" autocomplete="off" placeholder="1-1111-1111" aria-describedby="ayudaCedulaUsuario" required><small id="ayudaCedulaUsuario">Escriba los números; los guiones se agregan automáticamente.</small></div>
+          <div class="grupo-campo"><label for="filialUsuarioNuevo">Filial</label><select id="filialUsuarioNuevo" name="filialUsuarioNuevo" required><option value="">Seleccione una filial</option></select></div>
+          <div class="grupo-campo" id="grupoTipoRepresentante"><label for="tipoRepresentanteUsuarioNuevo">Condición de participación</label><select id="tipoRepresentanteUsuarioNuevo" name="tipoRepresentanteUsuarioNuevo"><option value="participante">Participante</option><option value="principal">Representante principal</option><option value="suplente">Representante suplente</option></select><small>El suplente puede asistir cuando el representante principal no pueda presentarse.</small></div>
+          <div class="grupo-campo"><label for="rolUsuarioNuevo">Tipo de usuario</label><select id="rolUsuarioNuevo" name="rolUsuarioNuevo" required><option value="votante">Votante</option><option value="admin">Administrador</option></select></div>
+          <div class="grupo-campo"><label for="correoUsuarioNuevo">Correo electrónico <span class="texto-opcional">(opcional para votantes)</span></label><input id="correoUsuarioNuevo" name="correoUsuarioNuevo" type="email" autocomplete="off" placeholder="nombre@ejemplo.com"></div><div class="grupo-campo" id="grupoContrasenaUsuario" hidden>
+         <label for="contrasenaUsuarioNuevo">Contraseña del administrador</label><input id="contrasenaUsuarioNuevo" name="contrasenaUsuarioNuevo" type="password" minlength="6" autocomplete="new-password" placeholder="Mínimo 6 caracteres"><small>Obligatoria para administradores. Con ella y su correo iniciará sesión en el panel.</small></div>
+          <p id="mensajeUsuario" class="mensaje campo-completo" role="status" aria-live="polite" hidden></p>
+          <div class="acciones-formulario campo-completo"><button type="submit" id="btnCrearUsuario" class="boton boton-principal"><span aria-hidden="true">＋</span> Registrar usuario</button><button type="button" id="btnCancelarEdicionUsuario" class="boton boton-claro" hidden>Cancelar edición</button></div>
+        </form>
+
+        <div class="subseccion-admin subseccion-usuarios-lista">
+          <div class="subseccion-cabecera"><span class="icono-bloque icono-violeta"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v2"/></svg></span><div><h3>Usuarios registrados</h3><p>Active o desactive usuarios sin borrar el historial asociado.</p></div></div>
+          <div class="filtros-usuarios"><div class="grupo-campo"><label for="buscarUsuario">Buscar por nombre, cédula o correo</label><input type="search" id="buscarUsuario" placeholder="Escriba para buscar..."></div><div class="grupo-campo"><label for="filtroRolUsuario">Tipo</label><select id="filtroRolUsuario"><option value="todos">Todos</option><option value="votante">Votantes</option><option value="admin">Administradores</option></select></div></div>
+          <div id="listaUsuarios" class="lista-usuarios"><p class="estado-vacio">Los usuarios registrados aparecerán aquí.</p></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 5: GESTIONAR FILIALES -->
+      <section id="seccionGestionarFiliales" class="seccion-panel" aria-labelledby="tituloGestionarFiliales" hidden>
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">ORGANIZACIÓN INSTITUCIONAL</p>
+          <h2 id="tituloGestionarFiliales">Gestionar filiales</h2>
+          <p>Agregue nuevas filiales, cambie sus nombres o desactive las que ya no estén en uso. Las personas y las reuniones mantienen sus propios registros.</p>
+        </div>
+        <div class="aviso-informativo"><strong>Importante:</strong> una filial que ya tiene usuarios, reuniones o votos asociados no se elimina físicamente para proteger el historial. En ese caso puede desactivarla; seguirá guardada, pero dejará de aparecer como opción para nuevas reuniones y registros.</div>
+        <form id="formFilial" class="formulario-admin formulario-en-cuadricula" novalidate>
+          <div class="grupo-campo campo-completo"><label for="nombreFilialGestion">Nombre de la filial</label><input id="nombreFilialGestion" name="nombreFilialGestion" type="text" maxlength="100" autocomplete="off" placeholder="Ej. Orotina" required></div>
+          <p id="mensajeFilial" class="mensaje campo-completo" role="status" aria-live="polite" hidden></p>
+          <div class="acciones-formulario campo-completo"><button type="submit" id="btnGuardarFilial" class="boton boton-principal"><span aria-hidden="true">＋</span> Agregar filial</button><button type="button" id="btnCancelarEdicionFilial" class="boton boton-claro" hidden>Cancelar edición</button></div>
+        </form>
+        <div class="subseccion-admin subseccion-filiales-lista">
+          <div class="subseccion-cabecera"><span class="icono-bloque icono-filial-bloque"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h2m2 0h2m-6 4h2m2 0h2m-6 4h2m2 0h2"/></svg></span><div><h3>Filiales registradas</h3><p>Busque una filial y administre su disponibilidad.</p></div></div>
+          <div class="grupo-campo campo-busqueda-filial"><label for="buscarFilial">Buscar filial</label><input id="buscarFilial" name="buscarFilial" type="search" placeholder="Escriba el nombre de una filial..."></div>
+          <div id="listaFiliales" class="lista-filiales" aria-live="polite"><p class="estado-vacio">Las filiales registradas aparecerán aquí.</p></div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN 6: HISTORIAL -->
+      <section id="seccionHistorial" class="seccion-panel" aria-labelledby="tituloHistorial" hidden>
+        <div class="encabezado-seccion">
+          <div class="detalle-tricolor" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p class="seccion-kicker">REGISTRO DE ACTIVIDAD</p>
+          <h2 id="tituloHistorial">Historial de reuniones</h2>
+          <p>Las reuniones finalizadas se conservan con sus preguntas y votos. Las más recientes aparecen primero, sin alterar el orden histórico de creación.</p>
+        </div>
+        <div class="filtros-historial"><div class="grupo-campo"><label for="buscarHistorial">Buscar reunión</label><input id="buscarHistorial" type="search" placeholder="Nombre o filial..."></div><div class="grupo-campo"><label for="filtroEstadoHistorial">Estado</label><select id="filtroEstadoHistorial"><option value="finalizadas">Finalizadas y canceladas</option><option value="todas">Todas las reuniones</option></select></div></div>
+        <div id="listaHistorial" class="lista-historial"><p class="estado-vacio">Cargando historial...</p></div>
+        <section id="detalleHistorial" class="detalle-historial" hidden aria-live="polite">
+          <div class="detalle-reunion-cabecera"><div><span class="etiqueta-superior">DETALLE HISTÓRICO</span><h3 id="tituloDetalleHistorial">Reunión</h3></div><button type="button" id="btnCerrarDetalleHistorial" class="boton boton-claro">Cerrar detalle</button></div>
+          <div id="contenidoDetalleHistorial" class="contenido-detalle-historial"><p class="estado-vacio">Seleccione una reunión del historial.</p></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
+  <footer class="pie-pagina-admin pie-pagina-mejorado">
+    <div class="pie-admin-contenido"><span class="texto-pie-mejorado">ADEP · Sistema de Votación</span><span class="texto-pie-mejorado">Democracia · Diálogo · Participación</span></div>
+  </footer>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <!-- Firebase Authentication se conserva para verificar el acceso al panel; la gestión de perfiles no crea cuentas secundarias. -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="reloj-servidor.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

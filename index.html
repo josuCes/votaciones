@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ADEP | Sistema de Votación</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body class="pagina-inicio">
+
+    <header class="encabezado">
+        <div class="encabezado-contenido">
+
+            <div class="marco-logo-inicio">
+                <img
+                    src="logo-blanco.png"
+                    alt="Logo de ADEP"
+                    class="logo-adep"
+                    id="logoAdep"
+                >
+            </div>
+
+            <div class="encabezado-texto">
+                <h1 class="titulo-principal">
+                    Sistema de Votación
+                </h1>
+
+                <p class="subtitulo-principal">
+                    Asociación de Educadores Pensionados
+                </p>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="contenido-principal">
+
+        <!-- INGRESO DE LOS VOTANTES -->
+        <section
+            class="panel panel-votante"
+            id="panelVotante"
+        >
+
+            <div class="detalle-tricolor" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <h2 class="titulo-panel">
+                Ingresar a una reunión
+            </h2>
+
+            <p class="texto-ayuda">
+                Seleccione su filial, ingrese su cédula y el PIN de la reunión.
+            </p>
+
+            <form
+                id="formIngresoVotante"
+                class="formulario-ingreso"
+            >
+
+                <div class="grupo-campo">
+
+                    <label
+                        for="filial"
+                        class="etiqueta-campo"
+                    >
+                        Filial
+                    </label>
+
+                    <select
+                        id="filial"
+                        name="filial"
+                        class="campo-select"
+                        required
+                    >
+                        <option value="">
+                            Cargando filiales...
+                        </option>
+                    </select>
+
+                </div>
+
+                <!-- CÉDULA COSTARRICENSE -->
+                <div class="grupo-campo">
+
+                    <label
+                        for="cedula"
+                        class="etiqueta-campo"
+                    >
+                        Número de cédula
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cedula"
+                        name="cedula"
+                        class="campo-texto"
+                        inputmode="numeric"
+                        pattern="[0-9]-[0-9]{4}-[0-9]{4}"
+                        minlength="11"
+                        maxlength="11"
+                        autocomplete="off"
+                        placeholder="1-1111-1111"
+                        aria-describedby="ayudaCedula"
+                        title="Ingrese una cédula con 9 números, en el formato 1-1111-1111."
+                        required
+                    >
+
+                    <small
+                        id="ayudaCedula"
+                        class="texto-ayuda-campo"
+                    >
+                        Ejemplo de formato: 1-1111-1111. Ingrese los 9 números de su cédula.
+                    </small>
+
+                </div>
+
+                <div class="grupo-campo">
+
+                    <label
+                        for="pinReunion"
+                        class="etiqueta-campo"
+                    >
+                        PIN de la reunión
+                    </label>
+
+                    <input
+                        type="password"
+                        id="pinReunion"
+                        name="pinReunion"
+                        class="campo-pin"
+                        inputmode="numeric"
+                        pattern="[0-9]{4}"
+                        minlength="4"
+                        maxlength="4"
+                        autocomplete="off"
+                        placeholder="••••"
+                        aria-describedby="ayudaPin"
+                        required
+                    >
+
+                    <small
+                        id="ayudaPin"
+                        class="texto-ayuda-campo"
+                    >
+                        Ingrese los 4 dígitos.
+                    </small>
+
+                </div>
+
+                <p
+                    id="mensajeIngreso"
+                    class="mensaje mensaje-error"
+                    role="alert"
+                    aria-live="polite"
+                    hidden
+                ></p>
+
+                <button
+                    type="submit"
+                    id="btnIngresar"
+                    class="boton boton-principal"
+                >
+                    INGRESAR
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- ACCESO ADMINISTRATIVO -->
+        <section
+            class="panel panel-administrador"
+            id="panelAdministrador"
+        >
+
+            <div class="detalle-tricolor" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <h2 class="titulo-panel">
+                Administración
+            </h2>
+
+            <p class="texto-ayuda">
+                Acceso exclusivo para personal autorizado.
+            </p>
+
+            <a
+                href="admin.html"
+                id="btnAccesoAdmin"
+                class="boton boton-secundario enlace-boton"
+            >
+                ACCESO ADMINISTRATIVO
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer class="pie-pagina">
+        <p class="texto-pie">
+            ADEP — Sistema de Votación
+        </p>
+    </footer>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+    <!-- CONFIGURACIÓN DE FIREBASE -->
+    <script src="firebase-config.js"></script>
+
+    <!-- LÓGICA DEL VOTANTE Y DEL INGRESO -->
+    <script src="votante.js"></script>
+
+</body>
+</html>

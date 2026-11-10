@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14513f">
+
+    <title>Votación | ADEP V2.0</title>
+
+    <!-- Tipografías legibles para personas mayores -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Merriweather:wght@700;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body class="pagina-votante pagina-votante-mejorada">
+
+    <!-- ========================================
+         ENCABEZADO
+    ========================================= -->
+
+    <header class="encabezado encabezado-votante encabezado-votante-mejorado">
+
+        <div class="encabezado-contenido encabezado-contenido-mejorado">
+
+            <div class="marco-logo-votante">
+                <img
+                    src="logo-blanco.png"
+                    alt="Logo de ADEP"
+                    class="logo-adep logo-adep-mejorado"
+                >
+            </div>
+
+            <div class="encabezado-texto encabezado-texto-mejorado">
+                <h1 class="titulo-principal titulo-principal-mejorado">
+                    Sistema de Votación
+                </h1>
+
+                <p class="subtitulo-principal subtitulo-principal-mejorado">
+                    Asociación de Educadores Pensionados
+                </p>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="contenido-principal contenido-votante contenido-votante-mejorado">
+
+        <!-- ========================================
+             INFORMACIÓN DE LA REUNIÓN (compacta)
+        ========================================= -->
+
+        <section
+            class="panel panel-informacion-reunion tarjeta-informacion-mejorada"
+            id="panelInformacionReunion"
+        >
+
+            <div class="cabecera-informacion">
+                <h2 class="titulo-panel titulo-informacion-mejorado">
+                    Mi reunión
+                </h2>
+
+                <div
+                    id="indicadorConexion"
+                    class="indicador-conexion indicador-conexion-mejorado"
+                    role="status"
+                    aria-live="polite"
+                >
+                    Verificando conexión...
+                </div>
+            </div>
+
+            <div class="cuadricula-datos-reunion">
+
+                <p class="dato-reunion-votante dato-reunion-mejorado dato-filial">
+                    <span class="etiqueta-dato etiqueta-dato-mejorada">
+                        Filial
+                    </span>
+
+                    <strong
+                        id="nombreFilial"
+                        class="valor-dato valor-dato-mejorado"
+                    >
+                        Verificando...
+                    </strong>
+                </p>
+
+                <p class="dato-reunion-votante dato-reunion-mejorado dato-reunion">
+                    <span class="etiqueta-dato etiqueta-dato-mejorada">
+                        Reunión
+                    </span>
+
+                    <strong
+                        id="nombreReunionVotante"
+                        class="valor-dato valor-dato-mejorado"
+                    >
+                        Reunión activa
+                    </strong>
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ESTADO 1: ESPERA
+        ========================================= -->
+
+        <section
+            id="panelEspera"
+            class="panel panel-espera panel-espera-mejorado"
+            aria-labelledby="tituloEspera"
+        >
+
+            <div class="icono-estado-espera icono-espera-mejorado" aria-hidden="true">
+                <span class="anillo-pulso anillo-pulso-uno"></span>
+                <span class="anillo-pulso anillo-pulso-dos"></span>
+                <span class="simbolo-espera simbolo-espera-mejorado">✓</span>
+            </div>
+
+            <h2
+                id="tituloEspera"
+                class="titulo-panel titulo-espera titulo-espera-mejorado"
+            >
+                Está dentro de la reunión
+            </h2>
+
+            <div class="detalle-tricolor detalle-tricolor-centrado" aria-hidden="true">
+                <span></span><span></span><span></span>
+            </div>
+
+            <p
+                id="estadoVotante"
+                class="texto-estado-votante texto-estado-mejorado"
+                role="status"
+                aria-live="polite"
+            >
+                Estamos verificando su acceso.
+            </p>
+
+            <p class="texto-espera-secundario texto-espera-mejorado">
+                Cuando el administrador publique una pregunta,
+                aparecerá aquí automáticamente.
+            </p>
+
+            <div class="puntos-espera" aria-hidden="true">
+                <span class="punto-espera"></span>
+                <span class="punto-espera"></span>
+                <span class="punto-espera"></span>
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ESTADO 2: VOTACIÓN ACTIVA
+        ========================================= -->
+
+        <section
+            id="panelVotacion"
+            class="panel panel-votacion panel-votacion-mejorado"
+            aria-labelledby="tituloVotacion"
+            hidden
+        >
+
+            <div class="encabezado-votacion encabezado-votacion-mejorado">
+
+                <h2
+                    id="tituloVotacion"
+                    class="titulo-panel titulo-votacion-mejorado"
+                >
+                    Votación abierta
+                </h2>
+
+                <!-- Estado + cronómetro en una sola fila -->
+                <div class="barra-votacion">
+
+                    <div
+                        id="estadoVotacionVotante"
+                        class="estado-votacion-votante estado-votacion-mejorado"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        ¡Es su turno de votar!
+                    </div>
+
+                    <div
+                        id="cronometroVotacion"
+                        class="cronometro-votante cronometro-votante-mejorado"
+                        role="timer"
+                        aria-label="Tiempo restante para votar"
+                    >
+                        60 s
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PREGUNTA ACTUAL -->
+
+            <div class="contenedor-pregunta-votante contenedor-pregunta-mejorado">
+
+                <h3 class="etiqueta-pregunta etiqueta-pregunta-mejorada">
+                    Pregunta
+                </h3>
+
+                <p
+                    id="textoPreguntaVotante"
+                    class="texto-pregunta-votante texto-pregunta-mejorado"
+                >
+                    La pregunta aparecerá aquí.
+                </p>
+
+            </div>
+
+
+            <!-- INSTRUCCIÓN -->
+
+            <p class="instruccion-voto">
+                Toque una opción para votar
+            </p>
+
+
+            <!-- OPCIONES DE VOTO: 2 arriba y 1 abajo (triángulo invertido) -->
+
+            <div
+                id="opcionesVoto"
+                class="opciones-voto opciones-voto-mejoradas"
+            >
+
+                <button
+                    type="button"
+                    id="btnVotarFavor"
+                    class="boton boton-voto boton-voto-favor boton-voto-mejorado"
+                    data-voto="favor"
+                >
+                    <span class="icono-boton-voto icono-boton-voto-mejorado" aria-hidden="true">
+                        ✓
+                    </span>
+
+                    <span class="contenido-boton-voto">
+                        <span class="texto-boton-voto">
+                            A FAVOR
+                        </span>
+                        <span class="descripcion-boton-voto" aria-hidden="true">
+                            Apoyo la propuesta
+                        </span>
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnVotarContra"
+                    class="boton boton-voto boton-voto-contra boton-voto-mejorado"
+                    data-voto="contra"
+                >
+                    <span class="icono-boton-voto icono-boton-voto-mejorado" aria-hidden="true">
+                        ✕
+                    </span>
+
+                    <span class="contenido-boton-voto">
+                        <span class="texto-boton-voto">
+                            EN CONTRA
+                        </span>
+                        <span class="descripcion-boton-voto" aria-hidden="true">
+                            No apoyo la propuesta
+                        </span>
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnVotarAbstencion"
+                    class="boton boton-voto boton-voto-abstencion boton-voto-mejorado"
+                    data-voto="abstencion"
+                >
+                    <span class="icono-boton-voto icono-boton-voto-mejorado" aria-hidden="true">
+                        —
+                    </span>
+
+                    <span class="contenido-boton-voto">
+                        <span class="texto-boton-voto">
+                            ABSTENCIÓN
+                        </span>
+                        <span class="descripcion-boton-voto" aria-hidden="true">
+                            No tomo posición
+                        </span>
+                    </span>
+                </button>
+
+            </div>
+
+
+            <!-- MENSAJES DE VOTACIÓN -->
+
+            <p
+                id="mensajeVotante"
+                class="mensaje mensaje-votante mensaje-votante-mejorado"
+                role="status"
+                aria-live="polite"
+                hidden
+            ></p>
+
+
+            <!-- CONFIRMACIÓN DEL VOTO -->
+
+            <div
+                id="confirmacionVoto"
+                class="confirmacion-voto confirmacion-voto-mejorada"
+                hidden
+            >
+
+                <div class="sello-confirmacion" aria-hidden="true">✓</div>
+
+                <h3 class="titulo-confirmacion titulo-confirmacion-mejorado">
+                    ¡Voto registrado!
+                </h3>
+
+                <p
+                    id="textoConfirmacionVoto"
+                    class="texto-confirmacion texto-confirmacion-mejorado"
+                >
+                    Su respuesta ha sido registrada.
+                </p>
+
+                <p class="texto-espera-secundario texto-confirmacion-secundario">
+                    Puede esperar para consultar los resultados.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ESTADO 3: RESULTADOS
+        ========================================= -->
+
+        <section
+            id="panelResultadosVotante"
+            class="panel panel-resultados-votante panel-resultados-mejorado"
+            aria-labelledby="tituloResultadosVotante"
+            hidden
+        >
+
+            <h2
+                id="tituloResultadosVotante"
+                class="titulo-panel titulo-resultados-mejorado"
+            >
+                Resultados de la votación
+            </h2>
+
+            <div class="pregunta-resultados-caja">
+                <span class="etiqueta-pregunta-resultados">Pregunta</span>
+                <p
+                    id="preguntaResultadosVotante"
+                    class="texto-pregunta-votante pregunta-resultados-mejorada"
+                >
+                    Pregunta de la votación
+                </p>
+            </div>
+
+
+            <div class="lista-resultados-votante lista-resultados-mejorada">
+
+                <!-- A FAVOR -->
+
+                <div class="resultado-votante resultado-favor resultado-mejorado">
+
+                    <div class="resultado-encabezado resultado-encabezado-mejorado">
+                        <span class="resultado-etiqueta resultado-etiqueta-mejorada">
+                            <span class="punto-resultado" aria-hidden="true"></span>
+                            A favor
+                        </span>
+
+                        <strong
+                            id="resultadoFavorVotante"
+                            class="resultado-cantidad resultado-cantidad-mejorada"
+                        >
+                            0
+                        </strong>
+                    </div>
+
+                    <div
+                        class="barra-resultado barra-resultado-mejorada"
+                        role="progressbar"
+                        aria-label="Porcentaje a favor"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="barraFavorVotante"
+                    >
+                        <div
+                            id="progresoFavorVotante"
+                            class="barra-progreso barra-progreso-mejorada"
+                        ></div>
+                    </div>
+
+                    <span
+                        id="porcentajeFavorVotante"
+                        class="resultado-porcentaje resultado-porcentaje-mejorado"
+                    >
+                        0 %
+                    </span>
+
+                </div>
+
+
+                <!-- EN CONTRA -->
+
+                <div class="resultado-votante resultado-contra resultado-mejorado">
+
+                    <div class="resultado-encabezado resultado-encabezado-mejorado">
+                        <span class="resultado-etiqueta resultado-etiqueta-mejorada">
+                            <span class="punto-resultado" aria-hidden="true"></span>
+                            En contra
+                        </span>
+
+                        <strong
+                            id="resultadoContraVotante"
+                            class="resultado-cantidad resultado-cantidad-mejorada"
+                        >
+                            0
+                        </strong>
+                    </div>
+
+                    <div
+                        class="barra-resultado barra-resultado-mejorada"
+                        role="progressbar"
+                        aria-label="Porcentaje en contra"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="barraContraVotante"
+                    >
+                        <div
+                            id="progresoContraVotante"
+                            class="barra-progreso barra-progreso-mejorada"
+                        ></div>
+                    </div>
+
+                    <span
+                        id="porcentajeContraVotante"
+                        class="resultado-porcentaje resultado-porcentaje-mejorado"
+                    >
+                        0 %
+                    </span>
+
+                </div>
+
+
+                <!-- ABSTENCIONES -->
+
+                <div class="resultado-votante resultado-abstencion resultado-mejorado">
+
+                    <div class="resultado-encabezado resultado-encabezado-mejorado">
+                        <span class="resultado-etiqueta resultado-etiqueta-mejorada">
+                            <span class="punto-resultado" aria-hidden="true"></span>
+                            Abstención
+                        </span>
+
+                        <strong
+                            id="resultadoAbstencionVotante"
+                            class="resultado-cantidad resultado-cantidad-mejorada"
+                        >
+                            0
+                        </strong>
+                    </div>
+
+                    <div
+                        class="barra-resultado barra-resultado-mejorada"
+                        role="progressbar"
+                        aria-label="Porcentaje de abstenciones"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0"
+                        id="barraAbstencionVotante"
+                    >
+                        <div
+                            id="progresoAbstencionVotante"
+                            class="barra-progreso barra-progreso-mejorada"
+                        ></div>
+                    </div>
+
+                    <span
+                        id="porcentajeAbstencionVotante"
+                        class="resultado-porcentaje resultado-porcentaje-mejorado"
+                    >
+                        0 %
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="resumen-resultados-votante resumen-resultados-mejorado">
+
+                <p class="dato-total-votos dato-total-mejorado">
+                    Total de respuestas:
+
+                    <strong id="totalVotosVotante">
+                        0
+                    </strong>
+                </p>
+
+            </div>
+
+
+            <p
+                id="mensajeResultadosVotante"
+                class="mensaje mensaje-resultados-mejorado"
+                role="status"
+                aria-live="polite"
+            >
+                Estos resultados corresponden a la votación actual.
+            </p>
+
+
+            <div class="aviso-siguiente-votacion aviso-siguiente-mejorado">
+
+                <p id="estadoSiguienteVotacion">
+                    Regresará a la pantalla de espera cuando
+                    corresponda iniciar la siguiente pregunta.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             MENSAJE DE ERROR O FINALIZACIÓN
+        ========================================= -->
+
+        <section
+            id="panelAvisoVotante"
+            class="panel panel-aviso-votante panel-aviso-mejorado"
+            aria-live="polite"
+            hidden
+        >
+
+            <div class="icono-aviso" aria-hidden="true">i</div>
+
+            <h2
+                id="tituloAvisoVotante"
+                class="titulo-panel titulo-aviso-mejorado"
+            >
+                Información de la reunión
+            </h2>
+
+            <p
+                id="textoAvisoVotante"
+                class="texto-estado-votante texto-aviso-mejorado"
+            >
+                La reunión ya no se encuentra disponible.
+            </p>
+
+            <a
+                href="index.html"
+                class="boton boton-principal enlace-boton"
+            >
+                VOLVER AL INICIO
+            </a>
+
+        </section>
+
+
+        <!-- ========================================
+             SALIR DE LA REUNIÓN
+        ========================================= -->
+
+        <div class="acciones-votante acciones-votante-mejoradas">
+
+            <button
+                type="button"
+                id="btnSalirReunion"
+                class="boton boton-secundario boton-salir-mejorado"
+            >
+                SALIR DE LA REUNIÓN
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <!-- ========================================
+         PIE DE PÁGINA
+    ========================================= -->
+
+    <footer class="pie-pagina pie-pagina-mejorado">
+        <p class="texto-pie texto-pie-mejorado">
+            ADEP — Sistema de Votación
+        </p>
+    </footer>
+
+
+    <!-- ========================================
+         VENTANA DE CONFIRMACIÓN
+         (la controla votante-confirmacion.js)
+         Sirve para: "¿Está seguro de su voto?"
+         y para "¿Desea salir de la reunión?"
+    ========================================= -->
+
+    <div id="modalConfirmacion" class="modal-fondo" hidden>
+
+        <div
+            id="modalTarjeta"
+            class="modal-tarjeta"
+            data-tipo="favor"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="modalTitulo"
+            aria-describedby="modalTexto"
+        >
+
+            <div id="modalIcono" class="modal-icono" aria-hidden="true">✓</div>
+
+            <h2 id="modalTitulo" class="modal-titulo">
+                ¿Está seguro?
+            </h2>
+
+            <p id="modalEleccion" class="modal-eleccion">
+                A FAVOR
+            </p>
+
+            <p id="modalPregunta" class="modal-pregunta"></p>
+
+            <p id="modalTexto" class="modal-texto">
+                Una vez aceptado, no podrá cambiar su voto.
+            </p>
+
+            <p id="modalTiempo" class="modal-tiempo"></p>
+
+            <div class="modal-acciones">
+
+                <button
+                    type="button"
+                    id="modalBtnAceptar"
+                    class="boton modal-boton modal-boton-aceptar"
+                >
+                    ✓ ACEPTAR
+                </button>
+
+                <button
+                    type="button"
+                    id="modalBtnRegresar"
+                    class="boton modal-boton modal-boton-regresar"
+                >
+                    ← REGRESAR
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+
+
+
+    <!-- ========================================
+         FIREBASE
+    ========================================= -->
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+
+    <!-- LÓGICA DEL VOTANTE -->
+    <script src="reloj-servidor.js"></script>
+    <script src="registro-ingreso-junta.js"></script>
+    <script src="votante.js"></script>
+
+    <!-- CONFIRMACIONES (archivo nuevo, independiente) -->
+    <script src="votante-confirmacion.js"></script>
+
+</body>
+
+</html>
